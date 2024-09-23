@@ -8,8 +8,9 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <h1>{{ title }}</h1>
+
 <ul>
   <li *ngFor="let forecast of weatherForecasts">
-    {{ forecast.date }}: {{ forecast.summary }} - {{ forecast.temperatureC }}°C
+    {{ forecast.summary }} - {{ forecast.date }} 
   </li>
 </ul>

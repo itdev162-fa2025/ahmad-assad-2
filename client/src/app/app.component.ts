@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -9,21 +11,18 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'client';
   weatherForecasts: any;
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.getWeatherForecasts();
+  ngOnInit(): void{
+    this.http.get('https://localhost:4200/WeatherForecast').subscribe({
+      next: (response) => this.weatherForecasts = response,
+      error: (e) => console.error(e),
+      complete: () => console.log('complete')
+    })
+  }
 }
-
-getWeatherForecasts() {
-  this.http.get('https://localhost:4200/WeatherForecast')
-    .subscribe((data) => {
-      this.weatherForecasts = data;
-      console.log(this.weatherForecasts);
-    });
-}
-}
+      
